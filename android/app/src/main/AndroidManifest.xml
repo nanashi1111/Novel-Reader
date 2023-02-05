@@ -1,5 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.duongvu.novelreader.novel_reader">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
    <application
         android:label="novel_reader"
         android:name="${applicationName}"

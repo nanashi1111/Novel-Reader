@@ -1,14 +1,14 @@
 import 'package:dio/dio.dart';
+import 'package:novel_reader/models/discovery.dart';
 
 class StoryRepository {
-
-  void testGetGeneralData() async {
+  Future<DiscoveryResponse> getDiscoveryData() async {
     try {
       var response = await Dio().get("https://api.truyenfull.vn/v1/discovery");
-      print(response.data);
-    }catch (e) {
-      print(e);
+      var discoveryData = DiscoveryResponse.fromJson(response.data);
+      return discoveryData;
+    } catch (e) {
+      rethrow;
     }
   }
-
 }

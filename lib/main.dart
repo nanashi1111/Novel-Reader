@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:novel_reader/screens/discover_screen.dart';
+import 'package:novel_reader/screens/discovery/discover_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -23,6 +23,14 @@ class MyApp extends StatelessWidget {
 }
 
 class NovelReaderHomePage extends StatefulWidget {
+  List<Widget> pages = [
+    DiscoverScreen(),
+    Text("Thể loại"),
+    Text("Tìm kiếm"),
+    Text("Lịch sử"),
+    Text("Cá nhân")
+  ];
+
   @override
   State<StatefulWidget> createState() {
     return _NovelReaderHomePageState();
@@ -30,16 +38,7 @@ class NovelReaderHomePage extends StatefulWidget {
 }
 
 class _NovelReaderHomePageState extends State<NovelReaderHomePage> {
-
   var selectedIndex = 0;
-
-   List<Widget> pages = [
-    DiscoverScreen(),
-    Text("Thể loại"),
-    Text("Tìm kiếm"),
-    Text("Lịch sử"),
-    Text("Cá nhân")
-  ];
 
   _onItemTapped(int index) {
     setState(() {
@@ -50,11 +49,10 @@ class _NovelReaderHomePageState extends State<NovelReaderHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   backgroundColor: Colors.white,
-      //   title: const Text("Truyện Full", style: TextStyle(color: Colors.black),),
-      // ),
-      body: pages[selectedIndex],
+      body: IndexedStack(
+        index: selectedIndex,
+        children: widget.pages,
+      ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         currentIndex: selectedIndex,
@@ -62,8 +60,11 @@ class _NovelReaderHomePageState extends State<NovelReaderHomePage> {
         unselectedItemColor: Colors.grey,
         onTap: _onItemTapped,
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.add),label: "Khám phá"),
-          BottomNavigationBarItem(icon: Icon(Icons.add), label: "Thể loại",),
+          BottomNavigationBarItem(icon: Icon(Icons.add), label: "Khám phá"),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.add),
+            label: "Thể loại",
+          ),
           BottomNavigationBarItem(icon: Icon(Icons.add), label: "Tìm kiếm"),
           BottomNavigationBarItem(icon: Icon(Icons.add), label: "Lịch sử"),
           BottomNavigationBarItem(icon: Icon(Icons.add), label: "Cá nhân")
@@ -71,5 +72,4 @@ class _NovelReaderHomePageState extends State<NovelReaderHomePage> {
       ),
     );
   }
-
 }
