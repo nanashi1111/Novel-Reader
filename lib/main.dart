@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:novel_reader/di/injection.dart';
 import 'package:novel_reader/screens/discovery/discover_screen.dart';
 
-void main() {
+void main() async {
+  await configInstances();
   runApp(const MyApp());
 }
 
@@ -38,6 +40,9 @@ class NovelReaderHomePage extends StatefulWidget {
 }
 
 class _NovelReaderHomePageState extends State<NovelReaderHomePage> {
+
+
+
   var selectedIndex = 0;
 
   _onItemTapped(int index) {

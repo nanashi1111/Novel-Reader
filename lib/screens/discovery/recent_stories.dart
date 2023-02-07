@@ -5,6 +5,7 @@ import 'package:novel_reader/screens/discovery/cubit/recent_stories_cubit.dart';
 import 'package:novel_reader/screens/discovery/cubit/recent_stories_state.dart';
 import '../../models/discovery.dart';
 
+
 class RecentScoriesScreen extends StatelessWidget {
   const RecentScoriesScreen({super.key});
 
@@ -38,10 +39,10 @@ class RecentStories extends StatelessWidget {
         builder: (context, state) {
       final double itemWidth = (MediaQuery.of(context).size.width - 20) / 3;
       const double itemHeight = 90;
-      final double ratio = itemWidth / itemHeight;
+      final double ratio = itemHeight / itemWidth;
 
       return Container(
-        padding: const EdgeInsets.only(left: 10, right: 10),
+        padding:  const EdgeInsets.only(left: 10, right: 10),
         width: MediaQuery.of(context).size.width,
         child: SizedBox(
             width: MediaQuery.of(context).size.width,
@@ -65,45 +66,43 @@ class RecentStories extends StatelessWidget {
                   visible: state is StoriesStateData,
                   child: GridView.builder(
                       gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
+                           SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 3,
                               mainAxisSpacing: 5,
                               crossAxisSpacing: 5,
-                              childAspectRatio: 1 / 2),
+                              childAspectRatio: ratio),
                       itemCount: provideStories(state).length,
                       shrinkWrap: true,
                       physics: const ClampingScrollPhysics(),
                       itemBuilder: (BuildContext context, index) {
-                        return Container(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              const SizedBox(
-                                height: 10,
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Expanded(
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                  child: Image.network(
+                                    provideStories(state).elementAt(index).image ??
+                                        "",
+                                    fit: BoxFit.cover,
+                                  ),
+                                )),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            SizedBox(
+                              height: 35,
+                              child: Text(
+                                "${provideStories(state).elementAt(index).title}",
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
                               ),
-                              Expanded(
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(8.0),
-                                    child: Image.network(
-                                      provideStories(state).elementAt(index).image ??
-                                          "",
-                                      fit: BoxFit.cover,
-                                    ),
-                                  )),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              SizedBox(
-                                height: 35,
-                                child: Text(
-                                  "${provideStories(state).elementAt(index).title}",
-                                  maxLines: 2,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ),
-                            ],
-                          ),
+                            ),
+                          ],
                         );
                       }),
                 )

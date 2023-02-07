@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter/services.dart';
 import 'package:novel_reader/screens/discovery/recent_stories.dart';
 
 class DiscoverScreen extends StatelessWidget {
 
   const DiscoverScreen({Key? key}) : super(key: key);
+
+  final MethodChannel platform = const MethodChannel("samples.flutter"
+      ".dev/battery");
+
+  void getBatteryLevel() async {
+    var level = await platform.invokeMethod("battery");
+    print("BatteryLevel = $level");
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,6 +65,7 @@ class DiscoverScreen extends StatelessWidget {
                                   ),
                                 )),
                             onTap: () {
+                              getBatteryLevel();
                             },
                           )),
                       Expanded(
