@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:novel_reader/di/injection.dart';
 import 'package:novel_reader/screens/discovery/discover_screen.dart';
+import 'package:novel_reader/screens/story_detail/story_detail_screen.dart';
 
 void main() async {
   await configInstances();

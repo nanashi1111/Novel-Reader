@@ -14,7 +14,9 @@ class RecentStoriesCubit extends Cubit<StoriesState> {
     emit(StoriesStateLoading());
     try {
       var response = await repo.getDiscoveryData();
-      emit(StoriesStateData(response));
+      var data = StoriesStateData(response);
+      print("${data.discoveryResponse.message}");
+      emit(data);
     }
     catch (ex) {
      emit(StoriesStateError(Exception("ex")));

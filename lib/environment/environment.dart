@@ -15,4 +15,5 @@ String provideBaseUrl() {
 
 class ApiPaths {
   static String discovery = "/discovery";
+  static String storyDetail = "/story/detail";
 }
